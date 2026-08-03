@@ -1,0 +1,1 @@
+Adicione as imagens da galeria de tattoo nesta pasta. Atualize o caminho no arquivo src/components/Services.tsx (ou apenas coloque as imagens aqui se for usar os caminhos pré-configurados).
