@@ -10,6 +10,7 @@ import {
   TiltCard,
 } from "@/components/primitives";
 import { avatars, media } from "@/lib/media";
+import logo2Img from "../../logos/logo2.png";
 
 const ease = EASE;
 
@@ -43,15 +44,15 @@ export function Hero() {
         <div className="grid items-center gap-14 lg:grid-cols-[1.05fr_0.95fr] lg:gap-10">
           {/* ---------------- Text ---------------- */}
           <motion.div style={{ y: yText }} className="flex flex-col items-start gap-7">
-            <motion.div
+            
+            <motion.img 
+              src={logo2Img} 
+              alt="Requinte" 
+              className="w-full max-w-[380px] lg:max-w-[680px] h-auto self-center -mt-12 lg:-mt-2 -mb-4 lg:-mb-12"
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease }}
-              className="inline-flex items-center gap-2 rounded-full border border-line px-4 py-1.5 text-xs font-medium text-ink-soft glass"
-            >
-              <Sparkles size={14} className="text-gold" />
-              Estúdio de estética &amp; beleza — desde 2016
-            </motion.div>
+            />
 
             <h1 className="font-display text-[2.7rem] leading-[1.02] tracking-tight sm:text-6xl lg:text-[4.4rem] xl:text-[5rem]">
               {["A arte de realçar"].map((t) => (
@@ -171,36 +172,6 @@ export function Hero() {
                 </div>
               </TiltCard>
 
-              {/* floating card: next slot */}
-              <motion.div
-                style={{ y: reduce ? 0 : undefined }}
-                className="absolute -left-3 top-10 z-20 anim-float sm:-left-8"
-              >
-                <div className="glass-strong flex items-center gap-3 rounded-2xl px-4 py-3 shadow-lux">
-                  <span className="grid h-9 w-9 place-items-center rounded-xl bg-[linear-gradient(135deg,var(--gold-soft),var(--gold-deep))] text-[#1c1108]">
-                    <CalendarClock size={17} />
-                  </span>
-
-                </div>
-              </motion.div>
-
-              {/* floating card: rating */}
-              <motion.div className="absolute -right-3 bottom-12 z-20 anim-float2 sm:-right-6">
-                <div className="glass-strong flex items-center gap-3 rounded-2xl px-4 py-3 shadow-lux">
-                  <span className="text-xl font-display text-gradient-gold">4,9</span>
-                  <div className="leading-tight">
-                    <StarRating value={5} size={12} />
-                    <p className="text-[0.7rem] text-ink-faint">+12 mil avaliações</p>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* floating badge */}
-              <motion.div className="absolute -right-2 top-6 z-20 anim-float sm:right-2">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-[#1c1108] px-3 py-1.5 text-[0.7rem] font-medium text-gold-soft shadow-lux">
-                  <MousePointerClick size={13} /> Agendamento online
-                </span>
-              </motion.div>
             </div>
           </motion.div>
         </div>

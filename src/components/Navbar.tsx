@@ -194,7 +194,7 @@ export function Navbar() {
                 <Link
                   to="/curso"
                   onClick={() => setOpen(false)}
-                  className="block border-b border-line py-4 font-display text-4xl tracking-tight text-gold"
+                  className="block border-b border-line py-4 font-display text-4xl tracking-tight"
                 >
                   Cursos
                 </Link>

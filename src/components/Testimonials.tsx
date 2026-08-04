@@ -1,3 +1,5 @@
+import { useRef } from "react";
+import { motion, useAnimationFrame, useMotionValue, useTransform } from "framer-motion";
 import type { CSSProperties } from "react";
 import { Quote } from "lucide-react";
 import {
@@ -92,18 +94,44 @@ function Row({
 }: {
   items: T[];
   reverse?: boolean;
-  duration: string;
+  duration: number;
 }) {
+  const baseX = useMotionValue(reverse ? -50 : 0);
+  const isPlaying = useRef(true);
+
+  useAnimationFrame((_, delta) => {
+    if (!isPlaying.current) return;
+    
+    const moveBy = (50 / (duration * 1000)) * delta;
+    
+    if (reverse) {
+      let next = baseX.get() + moveBy;
+      if (next >= 0) next -= 50;
+      baseX.set(next);
+    } else {
+      let next = baseX.get() - moveBy;
+      if (next <= -50) next += 50;
+      baseX.set(next);
+    }
+  });
+
   return (
-    <div className="mask-fade-x marquee-pause relative overflow-hidden py-2">
-      <div
-        className={cn("marquee-track", reverse && "reverse")}
-        style={{ "--marquee-duration": duration } as CSSProperties}
+    <div 
+      className="mask-fade-x relative overflow-hidden py-4 cursor-grab active:cursor-grabbing" 
+      style={{ transform: "translateZ(0)" }}
+      onPointerDown={() => isPlaying.current = false}
+      onPointerUp={() => isPlaying.current = true}
+      onPointerLeave={() => isPlaying.current = true}
+      onPointerCancel={() => isPlaying.current = true}
+    >
+      <motion.div
+        className="flex w-max"
+        style={{ x: useTransform(baseX, (v) => `${v}%`) }}
       >
-        {[...items, ...items].map((t, i) => (
+        {[...items, ...items, ...items, ...items].map((t, i) => (
           <TestimonialCard key={i} t={t} />
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }
@@ -136,8 +164,8 @@ export function Testimonials() {
       </Container>
 
       <div className="mt-12 flex flex-col gap-5">
-        <Row items={testimonials.slice(0, 3)} duration="44s" />
-        <Row items={testimonials.slice(3, 6)} reverse duration="52s" />
+        <Row items={testimonials.slice(0, 3)} duration={44} />
+        <Row items={testimonials.slice(3, 6)} reverse duration={52} />
       </div>
     </section>
   );

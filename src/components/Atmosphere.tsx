@@ -111,7 +111,6 @@ export function ScrollProgress() {
 /* Preloader                                                          */
 /* ------------------------------------------------------------------ */
 export function Preloader() {
-  const reduce = useReducedMotion();
   const [done, setDone] = useState(false);
 
   useEffect(() => {
@@ -122,42 +121,57 @@ export function Preloader() {
   }, [done]);
 
   useEffect(() => {
-    const t = setTimeout(() => setDone(true), reduce ? 200 : 1400);
+    const t = setTimeout(() => setDone(true), 8500);
     return () => clearTimeout(t);
-  }, [reduce]);
+  }, []);
 
   return (
     <AnimatePresence>
       {!done && (
         <motion.div
           className="fixed inset-0 z-[120] grid place-items-center bg-canvas"
-          exit={{ opacity: 0, scale: 1.04 }}
-          transition={{ duration: 0.7, ease: EASE }}
+          exit={{ opacity: 0, scale: 1.04, filter: "blur(10px)" }}
+          transition={{ duration: 1.5, ease: EASE }}
         >
-          <div className="flex flex-col items-center gap-6">
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
+          <div className="flex flex-col items-center text-center">
+            <motion.img 
+              src={logoImg} 
+              alt="Logo" 
+              className="mb-8 h-24 w-auto object-contain" 
+              initial={{ opacity: 0, scale: 0.8, filter: "blur(12px)" }}
+              animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+              transition={{ duration: 3.0, ease: [0.22, 1, 0.36, 1] }}
+            />
+            <motion.span 
+              className="block font-display text-5xl tracking-tight text-gradient-gold sm:text-7xl"
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: EASE }}
-              className="flex flex-col items-center text-center"
+              transition={{ duration: 2.0, delay: 1.5, ease: [0.22, 1, 0.36, 1] }}
             >
-              <img src={logoImg} alt="Logo" className="mb-6 h-20 w-auto object-contain" />
-              <span className="block font-display text-5xl tracking-tight text-gradient-gold sm:text-6xl">
-                Requinte
-              </span>
-              <span className="mt-2 block text-[0.65rem] font-semibold uppercase tracking-[0.4em] text-ink-faint">
-                Estética &amp; Beleza
-              </span>
-            </motion.div>
+              Requinte
+            </motion.span>
+            <motion.span 
+              className="mt-4 block text-[0.7rem] font-semibold uppercase text-ink-faint"
+              initial={{ opacity: 0, letterSpacing: "0em" }}
+              animate={{ opacity: 1, letterSpacing: "0.5em" }}
+              transition={{ duration: 3.0, delay: 2.5, ease: [0.22, 1, 0.36, 1] }}
+            >
+              Estética &amp; Beleza
+            </motion.span>
 
-            <div className="relative h-px w-44 overflow-hidden bg-line">
+            <motion.div 
+              className="relative mt-12 h-[2px] w-56 overflow-hidden rounded-full bg-line/60"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 3.5, duration: 1.5 }}
+            >
               <motion.div
                 className="absolute inset-y-0 left-0 bg-[linear-gradient(90deg,var(--gold-soft),var(--rose))]"
                 initial={{ width: "0%" }}
                 animate={{ width: "100%" }}
-                transition={{ duration: reduce ? 0.2 : 1.25, ease: EASE }}
+                transition={{ duration: 3.5, delay: 3.5, ease: [0.65, 0, 0.35, 1] }}
               />
-            </div>
+            </motion.div>
           </div>
         </motion.div>
       )}

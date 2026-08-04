@@ -60,8 +60,8 @@ function Newsletter() {
   const [sent, setSent] = useState(false);
 
   return (
-    <div>
-      <p className="flex items-center gap-2 text-sm font-semibold">
+    <div className="flex flex-col items-center lg:items-start w-full">
+      <p className="flex items-center justify-center lg:justify-start gap-2 text-sm font-semibold">
         <Mail size={15} className="text-gold" /> Receba ofertas e novidades
       </p>
       {sent ? (
@@ -72,7 +72,7 @@ function Newsletter() {
             e.preventDefault();
             if (email.trim()) setSent(true);
           }}
-          className="mt-3 flex items-center gap-2 rounded-full border border-line bg-surface p-1.5 pl-5 focus-within:border-gold/40"
+          className="mt-3 flex items-center gap-2 rounded-full border border-line bg-surface p-1.5 pl-5 focus-within:border-gold/40 w-full max-w-sm"
         >
           <input
             type="email"
@@ -112,9 +112,9 @@ export function Footer() {
       <Container className="relative py-16">
         <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr_1fr_1.3fr]">
           {/* Brand */}
-          <div className="flex flex-col gap-5">
+          <div className="flex flex-col items-center lg:items-start gap-5 text-center lg:text-left">
             <Logo src={logo2Img} hideText imgClassName="w-full h-auto max-w-[200px] lg:max-w-none" />
-            <div className="flex items-center gap-2.5">
+            <div className="flex items-center justify-center lg:justify-start gap-2.5">
               {socials.map((s) => (
                 <a
                   key={s.label}
@@ -130,9 +130,9 @@ export function Footer() {
 
           {/* Link columns */}
           {cols.map((col) => (
-            <div key={col.title}>
+            <div key={col.title} className="text-center lg:text-left">
               <h3 className="font-display text-lg">{col.title}</h3>
-              <ul className="mt-4 flex flex-col gap-2.5">
+              <ul className="mt-4 flex flex-col items-center lg:items-start gap-2.5">
                 {col.links.map((l: any) => (
                   <li key={l.label}>
                     {l.isRouterLink ? (
@@ -157,28 +157,28 @@ export function Footer() {
           ))}
 
           {/* Contact + newsletter */}
-          <div className="flex flex-col gap-6">
-            <div>
+          <div className="flex flex-col items-center lg:items-start gap-6 text-center lg:text-left w-full">
+            <div className="flex flex-col items-center lg:items-start w-full">
               <h3 className="font-display text-lg">Contato</h3>
-              <ul className="mt-4 flex flex-col gap-3 text-sm text-ink-soft">
-                <li className="flex items-start gap-2.5">
+              <ul className="mt-4 flex flex-col items-center lg:items-start gap-3 text-sm text-ink-soft">
+                <li className="flex items-start gap-2.5 text-left">
                   <MapPin size={16} className="mt-0.5 shrink-0 text-gold" />
                   <span>
                     Praça Cônego José Lourenço, Centro<br />
                     São Felipe, BA, Brasil, 44.550-000
                   </span>
                 </li>
-                <li className="flex items-center gap-2.5">
+                <li className="flex items-center gap-2.5 text-left">
                   <Phone size={16} className="shrink-0 text-gold" />
-                  (75) 98819-6083
+                  <span>(75) 98819-6083</span>
                 </li>
-                <li className="flex items-center gap-2.5">
+                <li className="flex items-center gap-2.5 text-left">
                   <Mail size={16} className="shrink-0 text-gold" />
-                  requintebemestar@gmail.com
+                  <span>requintebemestar@gmail.com</span>
                 </li>
-                <li className="flex items-center gap-2.5">
+                <li className="flex items-center gap-2.5 text-left">
                   <Clock size={16} className="shrink-0 text-gold" />
-                  Seg a Sáb · 9h às 20h
+                  <span>Seg a Sáb · 9h às 20h</span>
                 </li>
               </ul>
             </div>
