@@ -1,6 +1,5 @@
 import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { CalendarClock, MousePointerClick, Sparkles } from "lucide-react";
 import {
   Aurora,
   Button,
